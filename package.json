@@ -1,0 +1,32 @@
+{
+  "name": "dlp_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "docker-compose-down": "docker-compose -f './docker-compose.dev.yml' down",
+    "docker-compose-up:dev": "docker-compose -f './docker-compose.dev.yml' build; docker-compose -f './docker-compose.dev.yml' up",
+    "docker:dev": "npm run docker-compose-down; npm run docker-compose-up:dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.25.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.20",
+    "prettier": "2.7.1",
+    "sequelize-cli": "^6.5.2"
+  }
+}

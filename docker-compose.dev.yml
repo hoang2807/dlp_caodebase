@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysqldb
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Pionero_dlp
+      MYSQL_DATABASE: Pionero_dlp
+      MYSQL_USER: Pionero_dlp
+      MYSQL_PASSWORD: Pionero_dlp
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+      - ./db/backup/files/:/data_backup/data
+    restart: unless-stopped
+    networks:
+      - app-network
+  api:
+    depends_on:
+      - mysqldb
+    container_name: nodejsserver
+    hostname: nodejsserver
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      MYSQL_DATABASE: Pionero_dlp
+      MYSQL_ROOT_PASSWORD: Pionero_dlp
+      MYSQL_USER: Pionero_dlp
+      MYSQL_PASSWORD: Pionero_dlp
+    volumes:
+      - ./src:/api/src
+    restart: unless-stopped
+    networks:
+      - app-network
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - mysqldb
+      - api
+    restart: unless-stopped
+    networks:
+      - app-network
+volumes:
+  db-config:
+  db-data:
+networks:
+  app-network:
+    driver: bridge
