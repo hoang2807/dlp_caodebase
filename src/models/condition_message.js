@@ -6,8 +6,7 @@ const Condition_Message = sequelize.define(
   {
     m_id: {
       type: DataTypes.STRING,
-      autoIncrement: true,
-      primaryKey: true,
+      allowNull: false,
     },
     name_theme: {
       type: DataTypes.STRING,

@@ -6,7 +6,7 @@ const Evaluate = sequelize.define(
   {
     u_id: {
       type: DataTypes.STRING,
-      allowNull: null,
+      allowNull: false,
     },
     test_times: {
       type: DataTypes.INTEGER,

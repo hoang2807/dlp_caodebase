@@ -6,7 +6,6 @@ const Message = sequelize.define(
   {
     m_id: {
       type: DataTypes.STRING,
-      autoIncrement: true,
       primaryKey: true,
     },
     name_theme: {
