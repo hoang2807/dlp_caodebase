@@ -19,8 +19,8 @@ services:
       - db-data:/var/lib/mysql
       - ./db/backup/files/:/data_backup/data
     restart: unless-stopped
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
   api:
     depends_on:
       - mysqldb
@@ -42,8 +42,8 @@ services:
     volumes:
       - ./src:/api/src
     restart: unless-stopped
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
   nginx:
     build:
       context: ./nginx
@@ -55,11 +55,11 @@ services:
       - mysqldb
       - api
     restart: unless-stopped
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 volumes:
   db-config:
   db-data:
-networks:
-  app-network:
-    driver: bridge
+# networks:
+#   app-network:
+#     driver: bridge
